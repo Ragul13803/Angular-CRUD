@@ -1,0 +1,20 @@
+<div *ngIf="loading">Loading customers...</div>
+
+<table *ngIf="!loading" border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.phone }}</td>
+    </tr>
+  </tbody>
+</table>

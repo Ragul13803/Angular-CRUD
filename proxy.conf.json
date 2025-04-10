@@ -1,0 +1,9 @@
+{
+    "/api": {
+      "target": "https://next-crud-redux.vercel.app",
+      "secure": true,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }
+  
