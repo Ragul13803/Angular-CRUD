@@ -1,0 +1,60 @@
+
+<h1>Customer List</h1>
+<div class="btn-container">
+  <button class="btn" (click)="openDialog = true">(+)&nbsp;Add Customer</button>
+</div>
+
+<!-- Dialog -->
+<div class="dialog-overlay" *ngIf="openDialog">
+  <div class="dialog">
+    <h2>Add New Customer</h2>
+    <form (ngSubmit)="addCustomer()">
+      <div class="form-row">
+        <label>Name:</label>
+        <input type="text" [(ngModel)]="newCustomer.name" name="name" required />
+      </div>
+
+      <div class="form-row">
+        <label>Age:</label>
+        <input type="text" [(ngModel)]="newCustomer.age" name="age" required />
+      </div>
+
+      <div class="form-row">
+        <label>Gender:</label>
+        <div class="radio-group">
+          <label><input type="radio" [(ngModel)]="newCustomer.gender" name="gender" value="Male" required /> Male</label>
+          <label><input type="radio" [(ngModel)]="newCustomer.gender" name="gender" value="Female" /> Female</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Mobile:</label>
+        <input type="text" [(ngModel)]="newCustomer.mobile" name="mobile" required />
+      </div>
+
+      <div class="form-row">
+        <label>Email:</label>
+        <input type="email" [(ngModel)]="newCustomer.gmail" name="gmail" required />
+      </div>
+
+      <div class="dialog-actions">
+        <button type="submit" class="btn">Add</button>
+        <button type="button" class="btn cancel" (click)="openDialog = false">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Customer Cards -->
+<div class="card-container">
+  <div class="card" *ngFor="let customer of customers">
+    <div class="img-container">
+      <h2>{{ customer.name[0] | uppercase }}</h2>
+    </div>
+    <h2>{{ customer.name }}</h2>
+    <p><strong>Age:</strong> {{ customer.age }}</p>
+    <p><strong>Gender:</strong> {{ customer.gender }}</p>
+    <p><strong>Email:</strong> {{ customer.gmail }}</p>
+    <p><strong>Mobile:</strong> {{ customer.mobile }}</p>
+  </div>
+</div>
