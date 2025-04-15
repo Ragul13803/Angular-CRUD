@@ -46,7 +46,19 @@
 
 <!-- Customer Cards -->
 <div class="card-container">
-  <div class="card" *ngFor="let customer of customers">
+  <div class="card" *ngFor="let customer of customers; let i = index">
+    <div class="three-dot" (click)="openPopover($event, i)">⋮</div>
+  
+    <!-- Popover near the clicked dot -->
+    <div
+      class="popover"
+      *ngIf="selectedCustomerIndex === i"
+      [ngStyle]="{ top: popoverPosition.top + 'px', left: popoverPosition.right + 'px' }"
+    >
+      <button (click)="editCustomer(i)">Edit</button>
+      <button (click)="deleteCustomer(i)">Delete</button>
+    </div>
+  
     <div class="img-container">
       <h2>{{ customer.name[0] | uppercase }}</h2>
     </div>
@@ -55,5 +67,5 @@
     <p><strong>Gender:</strong> {{ customer.gender }}</p>
     <p><strong>Email:</strong> {{ customer.gmail }}</p>
     <p><strong>Mobile:</strong> {{ customer.mobile }}</p>
-  </div>
+  </div>    
 </div>

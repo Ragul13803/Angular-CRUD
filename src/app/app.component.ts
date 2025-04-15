@@ -13,6 +13,25 @@ import { CustomerService } from './services/customer.service';
 export class AppComponent implements OnInit {
   customers: any[] = [];
   openDialog = false;
+  
+  popoverPosition = { top: 0, left: 0 };
+  selectedCustomerIndex: number | null = null;
+
+  openPopover(event: MouseEvent, index: number) {
+    event.stopPropagation(); // Prevent closing immediately if body click handler exists
+    const target = event.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
+  
+    this.popoverPosition = {
+      top: rect.top + window.scrollY + 20,
+      left: rect.left + window.scrollX
+    };
+    this.selectedCustomerIndex = index;
+  }
+  
+  togglePopover(index: number) {
+    this.selectedCustomerIndex = this.selectedCustomerIndex === index ? null : index;
+  }
 
   newCustomer = {
     name: '',
@@ -50,5 +69,20 @@ export class AppComponent implements OnInit {
         }
       });
     }
+  }
+
+  editCustomer(index: number) {
+    const customer = this.customers[index];
+    this.newCustomer = { ...customer };
+    this.openDialog = true;
+    this.selectedCustomerIndex = null;
+  }
+  
+  deleteCustomer(index: number) {
+    const id = this.customers[index].id; // adjust based on your actual ID field
+    // this.customerService.deleteCustomer(id).subscribe(() => {
+    //   this.fetchCustomers();
+    //   this.selectedCustomerIndex = null;
+    // });
   }
 }
